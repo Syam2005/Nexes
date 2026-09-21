@@ -1,0 +1,229 @@
+@import "tailwindcss";
+
+/* ── NEXUS Design Tokens ─────────────────────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --bg-base:      #0f172a;   /* page background */
+  --bg-surface:   #0a0f1e;   /* card / panel */
+  --bg-elevated:  #0d1526;   /* slightly raised surface */
+  --bg-input:     #0f172a;   /* input field */
+  --bg-hover:     rgba(255,255,255,0.04);
+
+  /* Borders */
+  --border:       #1e293b;
+  --border-muted: #334155;
+  --border-focus: #6366f1;
+
+  /* Text */
+  --text-primary:   #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted:     #64748b;
+  --text-faint:     #475569;
+  --text-faintest:  #334155;
+
+  /* Brand */
+  --brand:          #6366f1;
+  --brand-dark:     #4f46e5;
+  --brand-muted:    #818cf8;
+  --brand-bg:       rgba(99,102,241,0.12);
+  --brand-border:   rgba(99,102,241,0.3);
+
+  /* Semantic */
+  --green:         #10b981;
+  --green-bg:      rgba(16,185,129,0.08);
+  --green-border:  rgba(16,185,129,0.2);
+  --red:           #ef4444;
+  --red-bg:        rgba(239,68,68,0.08);
+  --red-border:    rgba(239,68,68,0.2);
+  --amber:         #f59e0b;
+  --amber-bg:      rgba(245,158,11,0.08);
+
+  /* Sidebar */
+  --sidebar-bg:    #0a0f1e;
+  --sidebar-width: 220px;
+}
+
+/* ── LIGHT MODE overrides ────────────────────────────────────────────────── */
+[data-theme="light"] {
+  --bg-base:      #f1f5f9;
+  --bg-surface:   #ffffff;
+  --bg-elevated:  #f8fafc;
+  --bg-input:     #ffffff;
+  --bg-hover:     rgba(0,0,0,0.04);
+
+  --border:       #e2e8f0;
+  --border-muted: #cbd5e1;
+  --border-focus: #6366f1;
+
+  --text-primary:   #0f172a;
+  --text-secondary: #334155;
+  --text-muted:     #475569;
+  --text-faint:     #64748b;
+  --text-faintest:  #94a3b8;
+
+  --brand:          #6366f1;
+  --brand-dark:     #4f46e5;
+  --brand-muted:    #4f46e5;
+  --brand-bg:       rgba(99,102,241,0.1);
+  --brand-border:   rgba(99,102,241,0.3);
+
+  --green:         #059669;
+  --green-bg:      rgba(5,150,105,0.08);
+  --green-border:  rgba(5,150,105,0.2);
+  --red:           #dc2626;
+  --red-bg:        rgba(220,38,38,0.08);
+  --red-border:    rgba(220,38,38,0.2);
+  --amber:         #d97706;
+  --amber-bg:      rgba(217,119,6,0.08);
+
+  --sidebar-bg:    #ffffff;
+}
+
+/* ── Base reset ──────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  margin: 0;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+/* ── Scrollbars ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-muted); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-faint); }
+
+/* ── Utility classes (used by components) ────────────────────────────────── */
+.nx-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.nx-surface {
+  background: var(--bg-surface);
+  transition: background 0.2s;
+}
+
+.nx-input {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 13px;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.15s, background 0.2s, color 0.2s;
+}
+.nx-input:focus { border-color: var(--border-focus); }
+.nx-input::placeholder { color: var(--text-faint); }
+
+.nx-btn {
+  background: var(--brand);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+.nx-btn:hover { background: var(--brand-dark); }
+.nx-btn:active { transform: scale(0.98); }
+.nx-btn:disabled { background: var(--border); color: var(--text-faint); cursor: default; }
+
+.nx-btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.nx-btn-ghost:hover { background: var(--bg-hover); }
+
+/* ── Risk badges ─────────────────────────────────────────────────────────── */
+.risk-LOW    { color: var(--green); }
+.risk-MEDIUM { color: var(--amber); }
+.risk-HIGH   { color: var(--red); }
+
+.badge { display: inline-block; padding: 2px 10px; border-radius: 9999px; font-size: 12px; font-weight: 600; }
+.badge-LOW    { background: var(--green-bg);  color: var(--green); border: 1px solid var(--green-border); }
+.badge-MEDIUM { background: var(--amber-bg);  color: var(--amber); border: 1px solid rgba(245,158,11,0.3); }
+.badge-HIGH   { background: var(--red-bg);    color: var(--red);   border: 1px solid var(--red-border); }
+
+/* ── Status indicator dot ────────────────────────────────────────────────── */
+@keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.4} }
+.pulse-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--brand);
+  animation: pulse-dot 1.2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+/* ── Layer trace items ───────────────────────────────────────────────────── */
+.layer-trace-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 12px; border-radius: 8px;
+  font-size: 13px; margin-bottom: 4px;
+}
+.layer-trace-item.running { background: var(--brand-bg); border: 1px solid var(--brand-border); }
+.layer-trace-item.success { background: var(--green-bg); border: 1px solid var(--green-border); }
+.layer-trace-item.error   { background: var(--red-bg);   border: 1px solid var(--red-border); }
+.layer-trace-item.pending { background: var(--bg-hover); border: 1px solid var(--border); color: var(--text-secondary); }
+
+/* ── Select elements ─────────────────────────────────────────────────────── */
+select {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 12px;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+select:focus { border-color: var(--border-focus); }
+
+/* ── Sidebar theming ─────────────────────────────────────────────────────── */
+.nx-sidebar {
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--border);
+  transition: background 0.25s, border-color 0.25s, width 0.2s ease;
+}
+
+/* ── Main content area ───────────────────────────────────────────────────── */
+.nx-main {
+  background: var(--bg-base);
+  transition: background 0.25s;
+}
+
+/* ── Metric cards ────────────────────────────────────────────────────────── */
+.nx-metric-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+/* ── Diff viewer dark/light ──────────────────────────────────────────────── */
+[data-theme="light"] .react-diff-viewer {
+  --diff-bg: #ffffff;
+  --diff-color: #1e293b;
+}
+
+/* ── Transitions on all themed elements ─────────────────────────────────── */
+.nx-card, .nx-surface, .nx-metric-card, .nx-sidebar, .nx-main,
+select, .nx-input, .nx-btn-ghost {
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}

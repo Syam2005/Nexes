@@ -1,0 +1,68 @@
+{
+  "python": [
+    {"legacy": "print 'hello'", "modern": "print('hello')", "pattern": "print_statement"},
+    {"legacy": "print \"hello\"", "modern": "print(\"hello\")", "pattern": "print_statement"},
+    {"legacy": "xrange(10)", "modern": "range(10)", "pattern": "xrange_usage"},
+    {"legacy": "xrange(0, n)", "modern": "range(0, n)", "pattern": "xrange_usage"},
+    {"legacy": "dict.has_key('key')", "modern": "'key' in dict", "pattern": "has_key_removal"},
+    {"legacy": "d.has_key(k)", "modern": "k in d", "pattern": "has_key_removal"},
+    {"legacy": "import urllib2", "modern": "import urllib.request as urllib2", "pattern": "urllib2_usage"},
+    {"legacy": "urllib2.urlopen(url)", "modern": "urllib.request.urlopen(url)", "pattern": "urllib2_usage"},
+    {"legacy": "\"%s\" % var", "modern": "f\"{var}\"", "pattern": "string_format_percent"},
+    {"legacy": "except Exception, e:", "modern": "except Exception as e:", "pattern": "old_except_syntax"},
+    {"legacy": "raw_input(", "modern": "input(", "pattern": "raw_input_usage"},
+    {"legacy": "basestring", "modern": "str", "pattern": "basestring_usage"},
+    {"legacy": "reduce(", "modern": "functools.reduce(", "pattern": "reduce_builtin"},
+    {"legacy": "filter(", "modern": "list(filter(", "pattern": "filter_builtin"},
+    {"legacy": "map(lambda x:", "modern": "[x", "pattern": "map_lambda"}
+  ],
+  "javascript": [
+    {"legacy": "var ", "modern": "const ", "pattern": "var_declaration"},
+    {"legacy": "function() {", "modern": "() => {", "pattern": "arrow_function"},
+    {"legacy": "function(x) {", "modern": "(x) => {", "pattern": "arrow_function"},
+    {"legacy": ".then(function(", "modern": "async function", "pattern": "promise_chain"},
+    {"legacy": "new XMLHttpRequest()", "modern": "fetch(", "pattern": "xhr_to_fetch"},
+    {"legacy": "\"string\" + variable", "modern": "`string${variable}`", "pattern": "template_literal"},
+    {"legacy": "== null", "modern": "=== null", "pattern": "strict_equality"},
+    {"legacy": "!= undefined", "modern": "!== undefined", "pattern": "strict_equality"},
+    {"legacy": "Object.assign({},", "modern": "{ ...", "pattern": "spread_operator"},
+    {"legacy": "require('", "modern": "import ", "pattern": "commonjs_to_esm"}
+  ],
+  "java": [
+    {"legacy": "ArrayList list = new ArrayList()", "modern": "ArrayList<Object> list = new ArrayList<>()", "pattern": "raw_type"},
+    {"legacy": "StringBuffer ", "modern": "StringBuilder ", "pattern": "stringbuffer_to_builder"},
+    {"legacy": "System.out.println(", "modern": "logger.info(", "pattern": "system_out_logging"},
+    {"legacy": "for (int i = 0; i < list.size(); i++)", "modern": "for (var item : list)", "pattern": "enhanced_for"},
+    {"legacy": "if (obj == null)", "modern": "Optional.ofNullable(obj)", "pattern": "optional_usage"},
+    {"legacy": "new Integer(", "modern": "Integer.valueOf(", "pattern": "autoboxing"},
+    {"legacy": "catch (Exception e) {}", "modern": "catch (Exception e) { logger.error(", "pattern": "empty_catch"}
+  ],
+  "go": [
+    {"legacy": "errors.New(fmt.Sprintf(", "modern": "fmt.Errorf(", "pattern": "error_formatting"},
+    {"legacy": "if err != nil { return err }", "modern": "if err != nil { return fmt.Errorf(\"context: %w\", err) }", "pattern": "error_wrapping"},
+    {"legacy": "ioutil.ReadFile(", "modern": "os.ReadFile(", "pattern": "ioutil_deprecated"},
+    {"legacy": "ioutil.WriteFile(", "modern": "os.WriteFile(", "pattern": "ioutil_deprecated"}
+  ],
+  "ruby": [
+    {"legacy": "has_key?", "modern": "key?", "pattern": "hash_has_key"},
+    {"legacy": "Array.new.each", "modern": "[].each", "pattern": "array_literal"},
+    {"legacy": "lambda {|x|", "modern": "->(x) {", "pattern": "lambda_syntax"}
+  ],
+  "rust": [
+    {"legacy": "try!(", "modern": "?", "pattern": "try_macro"},
+    {"legacy": "Box::new(", "modern": "Box::new(", "pattern": "heap_allocation"}
+  ],
+  "cpp": [
+    {"legacy": "NULL", "modern": "nullptr", "pattern": "null_pointer"},
+    {"legacy": "auto_ptr<", "modern": "unique_ptr<", "pattern": "smart_pointer"},
+    {"legacy": "printf(", "modern": "std::cout <<", "pattern": "printf_to_cout"}
+  ],
+  "csharp": [
+    {"legacy": "ArrayList ", "modern": "List<object> ", "pattern": "generic_collections"},
+    {"legacy": "String.Format(", "modern": "$\"", "pattern": "string_interpolation"}
+  ],
+  "php": [
+    {"legacy": "mysql_query(", "modern": "PDO->query(", "pattern": "mysql_deprecated"},
+    {"legacy": "ereg(", "modern": "preg_match(", "pattern": "ereg_deprecated"}
+  ]
+}

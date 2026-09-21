@@ -1,0 +1,50 @@
+services:
+  - type: web
+    name: nexus-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: chmod +x build.sh && ./build.sh
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: GITHUB_CLIENT_ID
+        sync: false
+      - key: GITHUB_CLIENT_SECRET
+        sync: false
+      - key: SECRET_KEY
+        generateValue: true
+      - key: RESEND_API_KEY
+        sync: false
+      - key: EMAIL_FROM
+        sync: false
+      - key: WEBHOOK_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: nexus-db
+          property: connectionString
+      - key: FRONTEND_URL
+        sync: false
+      - key: PYTHON_VERSION
+        value: "3.13.0"
+
+  - type: web
+    name: nexus-frontend
+    runtime: node
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    startCommand: npx serve dist --listen $PORT
+    envVars:
+      - key: VITE_API_URL
+        sync: false
+
+databases:
+  - name: nexus-db
+    databaseName: nexus
+    user: nexus
+    plan: free
